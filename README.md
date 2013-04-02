@@ -1,6 +1,6 @@
 # AngularJS-Foursquare #
 
-AngularJS-Foursquare provides easy access to [Foursquare APIs][1]
+[AngularJS-Foursquare][homepage] provides easy access to [Foursquare APIs][foursquare-api]. You can use it to build Web Application using Foursquare resources (users, checkins, venues, etc.).
 
 ## Getting started ##
 
@@ -12,11 +12,11 @@ AngularJS-Foursquare provides easy access to [Foursquare APIs][1]
 
 ### with git ###
 
-from your project public directory root
+from your project public directory root : 
 
 > git clone git://texthtml.net/webapp/lib/angularjs/foursquare components/angularjs-foursquare
 
-or
+or : 
 
 > git submodule add git://texthtml.net/webapp/lib/angularjs/foursquare components/angularjs-foursquare
 
@@ -42,7 +42,7 @@ You need to adjust the path if you install AngularJS-Foursquare somewhere else.
     		// FoursquareProvider.setPath('components/angularjs-foursquare'); 
     	});
 
-YOUR_REGISTERED_REDIRECT_URI should also be a page where the FoursquareService is configured
+YOUR_REGISTERED_REDIRECT_URI should also be a page where the FoursquareService is configured.
 
 
 ### Usage ##
@@ -58,5 +58,23 @@ Inject the *Foursquare* Service
 #### Foursqure directives ####
 
     <fsq:login ng:show="!fsq.logged" fsq:display="touch" fsq:color="black"></fsq:login>
-  
-[1]: https://developer.foursquare.com/overview/
+
+## Documentation ##
+
+This is a work in progress. There is no other documentation than the source code and your browser console yet. 
+Some day it will be there : [AngularJS-Foursquare Wiki][wiki].
+
+## Bugs ##
+
+There are [bugs][bugs] (even if they are not listed). But I'd like to get rid of them. If you want to help, you can [report one][report-bug].
+
+## Suggestions & Contributions ##
+
+The easiest way to get started here is to send me en email at <mathieu@rochette.cc>.
+
+
+[homepage]: https://texthtml.net/trac/projects/webapp-lib-angularjs-foursquare
+[foursquare-api]: https://developer.foursquare.com/overview/
+[bugs]: https://texthtml.net/trac/projects/webapp-lib-angularjs-foursquare/issues
+[report-bug]: https://texthtml.net/trac/projects/webapp-lib-angularjs-foursquare/issues/new
+[wiki]: https://texthtml.net/trac/projects/webapp-lib-angularjs-foursquare/wiki
