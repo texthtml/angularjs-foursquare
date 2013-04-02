@@ -316,7 +316,7 @@
 			authURI: function FoursquareAuthURI(display, response_type) {
 				return 'https://foursquare.com/oauth2/authenticate' + 
 					'?client_id=' + FoursquareClientParams.client_id + 
-					'&display=' + (display || 'touch') + 
+					'&display=' + (display || '') + 
 					'&response_type=' + (response_type || 'token') + 
 					'&redirect_uri=' + encodeURI(FoursquareClientRedirectURI);
 			}, 
