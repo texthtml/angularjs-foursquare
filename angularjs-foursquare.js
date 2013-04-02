@@ -1,6 +1,9 @@
 (function() {
 	"use strict";
 	
+	
+	var FoursquareResourcesPath = 'components/angularjs-foursquare';
+	
 	function FoursquareService($q, $http, $rootScope, clientId, clientSecret, clientRedirectURI, clientSaveOAuthToken, clientGetOAuthToken) {
 		var
 			FoursquareAPI = 'https://api.foursquare.com/v2/', 
@@ -299,7 +302,7 @@
 			}
 		};
 		
-		this.config = function(config) {
+		this.config = function FoursquareProviderConfig(config) {
 			for(var key in config) {
 				FoursquareConfig[key] = config[key] || FoursquareConfig[key];
 			}
@@ -311,7 +314,11 @@
 			}
 		};
 		
-		this.$get = function($q, $http, $rootScope) {
+		this.setPath = function FoursquareProviderSetPath(path) {
+			FoursquareResourcesPath = path;
+		}
+		
+		this.$get = function FoursquareProviderFactory($q, $http, $rootScope) {
 			return new FoursquareService(
 				$q, $http, 
 				$rootScope, 
@@ -327,7 +334,7 @@
 	}).directive('fsqLogin', function foursquareLoginDirective($parse, Foursquare) {
 		return {
 			restrict: 'E', 
-			template: '<form><input type="image" src="/components/angularjs-foursquare/connect-{{color}}.png" alt="connect to Foursquare"></input></form>', 
+			template: '<form><input type="image" src="' + FoursquareResourcesPath + '/connect-{{color}}.png" alt="connect to Foursquare"></input></form>', 
 			replace: true, 
 			scope: {
 				onLogin: '&fsqOnLogin', 
