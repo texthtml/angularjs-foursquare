@@ -388,11 +388,25 @@
 
 	angular.module('FoursquareService', ['ngResource'], function($provide) {
 		$provide.provider('Foursquare', FoursquareProvider);
-	}).directive('fsq:image', function foursquareImageFactory() {
+	}).directive('fsqLogin', function foursquareLoginDirective($parse, Foursquare) {
 		return {
 			restrict: 'E', 
-			link: function() {
-				console.log('eee');
+			template: '<form><input type="image" src="/components/angularjs-foursquare/connect-{{color}}.png" alt="connect to Foursquare"></input></form>', 
+			replace: true, 
+			scope: {
+				onLogin: '&fsqOnLogin', 
+				color: '@fsqColor', 
+				step: '@fsqStep', 
+				display: '@fsqDisplay'
+			}, 
+			link: function foursquareLoginLinking(scope, element, attrs) {
+				scope.fsq = Foursquare;
+				
+				var onLogin = $parse(scope.onLogin);
+				
+				element.bind('submit', function() {
+					Foursquare.login(onLogin, scope.step, scope.display);
+				});
 			}
 		}
 	});
