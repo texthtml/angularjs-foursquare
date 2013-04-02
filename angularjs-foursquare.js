@@ -193,9 +193,110 @@
 		api.checkins.reply           = FoursquareEndpoint('checkins/:checkin_id/reply',         {},                'post', 'reply');
 		
 		
+		api.tips                     = FoursquareEndpoint('tips/:tip_id',                       {},                'get',  'tip');
+		
+		api.tips.add                 = FoursquareEndpoint('tips/add',                           {},                'post', 'tip');
+		api.tips.search              = FoursquareEndpoint('tips/search',                        {},                'get',  '*tips');
+		
+		api.tips.likes               = FoursquareEndpoint('tips/:tip_id/likes',                 {},                'get',  'likes');
+		api.tips.listed              = FoursquareEndpoint('tips/:tip_id/listed',                {},                'get',  'lists');
+		api.tips.saves               = FoursquareEndpoint('tips/:tip_id/saves',                 {},                'get',  'saves');
+		
+		api.tips.flag                = FoursquareEndpoint('tips/:tip_id/flag',                  {},                'post');
+		api.tips.like                = FoursquareEndpoint('tips/:tip_id/like',                  {},                'post', 'likes');
+		api.tips.unmark              = FoursquareEndpoint('tips/:tip_id/unmark',                {},                'post', 'tip');
+		
+		api.lists                    = FoursquareEndpoint('lists/:list_id',                     {},                'get',  'list');
+		
+		api.lists.add                = FoursquareEndpoint('lists/add',                          {},                'post', 'list');
+		
+		api.lists.followers          = FoursquareEndpoint('lists/:list_id/followers',           {},                'get', 'followers');
+		api.lists.saves              = FoursquareEndpoint('lists/:list_id/saves',               {},                'get', 'saves');
+		api.lists.suggestphoto       = FoursquareEndpoint('lists/:list_id/suggestphoto',        {},                'get', 'photos');
+		api.lists.suggesttip         = FoursquareEndpoint('lists/:list_id/suggesttip',          {},                'get', 'tips');
+		api.lists.suggestvenues      = FoursquareEndpoint('lists/:list_id/suggestvenues',       {},                'get', 'suggestedVenues');
+		
+		api.lists.additem            = FoursquareEndpoint('lists/:list_id/additem',             {},                'post');
+		api.lists.deleteitem         = FoursquareEndpoint('lists/:list_id/deleteitem',          {},                'post');
+		api.lists.follow             = FoursquareEndpoint('lists/:list_id/follow',              {},                'post', 'list');
+		api.lists.moveitem           = FoursquareEndpoint('lists/:list_id/moveitem',            {},                'post', 'list');
+		api.lists.share              = FoursquareEndpoint('lists/:list_id/share',               {},                'post');
+		api.lists.unfollow           = FoursquareEndpoint('lists/:list_id/unfollow',            {},                'post', 'list');
+		api.lists.update             = FoursquareEndpoint('lists/:list_id/update',              {},                'post', 'list');
+		api.lists.updateitem         = FoursquareEndpoint('lists/:list_id/updateitem',          {},                'post');
+		
+		
+		api.updates                  = FoursquareEndpoint('updates/:update_id',                 {},                'get',  'notification');
+		
+		api.updates.notifications    = FoursquareEndpoint('updates/notifications',              {},                'get',  'notifications');
+		
+		api.updates.markasread       = FoursquareEndpoint('updates/marknotificationsread',      {},                'get',  'notifications');
+		
+		
 		api.photos                   = FoursquareEndpoint('photos/:photo_id',                   {},                'get',  'photo');
 		
-		api.photos.add               = FoursquareEndpoint('photos/add',                         {},                'post', 'photo');
+		api.photos.add               = FoursquareEndpoint('photos/add',                         {},                'post', 'photo', {'content-type': 'image/jpeg'});
+		
+		
+		api.settings                 = FoursquareEndpoint('settings/:setting_id',               {},                'get',  'value');
+		
+		api.settings.all             = FoursquareEndpoint('settings/all',                       {},                'get',  'settings');
+		
+		api.settings.set             = FoursquareEndpoint('settings/:setting_id/set',           {},                'post', 'message');
+		
+		
+		api.specials                 = FoursquareEndpoint('specials/:special_id',               {},                'get',  'special');
+		
+		api.specials.add             = FoursquareEndpoint('specials/add',                       {},                'post', 'special');
+		api.specials.list            = FoursquareEndpoint('specials/list',                      {},                'get',  'specials');
+		api.specials.search          = FoursquareEndpoint('specials/search',                    {},                'get',  '*specials');
+		
+		api.specials.configuration   = FoursquareEndpoint('specials/:special_id/configuration', {},                'post', 'special');
+		
+		api.specials.flag            = FoursquareEndpoint('specials/:special_id/flag',          {},                'post');
+		api.specials.retire          = FoursquareEndpoint('specials/:special_id/retire',        {},                'post');
+		
+		
+		api.campaigns                = FoursquareEndpoint('campaigns/:campaign_id',             {},                'get',  'campaigns');
+		
+		api.campaigns.add            = FoursquareEndpoint('campaigns/add',                      {},                'post', 'campaign');
+		api.campaigns.list           = FoursquareEndpoint('campaigns/list',                     {},                'get',  'matches');
+		
+		
+		api.campaigns.timeseries     = FoursquareEndpoint('campaigns/:campaign_id/timeseries',  {},                'get',  '*timeseries');
+		
+		api.campaigns.delete         = FoursquareEndpoint('campaigns/:campaign_id/delete',      {},                'post');
+		api.campaigns.end            = FoursquareEndpoint('campaigns/:campaign_id/end',         {},                'post');
+		api.campaigns.start          = FoursquareEndpoint('campaigns/:campaign_id/start',       {},                'post');
+		
+		
+		api.events                   = FoursquareEndpoint('events/:event_id',                   {},                'get',  'event');
+		
+		api.events.categories        = FoursquareEndpoint('events/categories',                  {},                'get',  '*categories');
+		api.events.search            = FoursquareEndpoint('events/search',                      {},                'get',  '*event');
+		
+		api.events.add               = FoursquareEndpoint('events/add',                         {},                'post', 'event');
+		
+		
+		api.pages                    = FoursquareEndpoint('pages/:user_id',                     {},                'get',  'user');
+		
+		api.pages.add                = FoursquareEndpoint('pages/add',                          {},                'post');
+		api.pages.managing           = FoursquareEndpoint('pages/managing',                     {},                'get',  '*managing');
+		api.pages.search             = FoursquareEndpoint('pages/search',                       {},                'get',  '*results');
+		
+		api.pages.timeseries         = FoursquareEndpoint('pages/:page_id/timeseries',          {},                'get',  '*timeseries');
+		api.pages.venues             = FoursquareEndpoint('pages/:page_id/venues',              {},                'get',  'venues');
+		
+		api.pages.like               = FoursquareEndpoint('pages/:page_id/like',                {},                'post', 'user');
+		
+		
+		api.pageupdate               = FoursquareEndpoint('pageupdates/:update_id',             {},                'get',  'pageUpdate');
+		
+		api.pageupdate.add           = FoursquareEndpoint('pageupdates/add',                    {},                'post', 'pageUpdate');
+		api.pageupdate.list          = FoursquareEndpoint('pageupdates/list',                   {},                'get',  'pageUpdates');
+		
+		api.pageupdate.delete        = FoursquareEndpoint('pageupdates/:update_id/delete',      {},                'post');
+		api.pageupdate.like          = FoursquareEndpoint('pageupdates/:update_id/like',        {},                'post');
 		
 		
 		var Foursquare = {
