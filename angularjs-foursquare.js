@@ -350,13 +350,22 @@
 			clientId: undefined, 
 			clientSecret: undefined, 
 			redirectURI: undefined, 
-			saveOAuthToken: undefined, 
-			getOAuthToken: undefined
+			saveOAuthToken: function SaveOAuthToken(OAuthToken) {
+				if(OAuthToken === undefined) {
+					localStorage.removeItem('foursquare_oauth_token');
+				}
+				else {
+					localStorage.foursquare_oauth_token = OAuthToken;
+				}
+			}, 
+			getOAuthToken: function GetOAuthToken() {
+				return localStorage.foursquare_oauth_token;
+			}
 		};
 		
 		this.config = function(config) {
 			for(var key in config) {
-				FoursquareConfig[key] = config[key];
+				FoursquareConfig[key] = config[key] || FoursquareConfig[key];
 			}
 			
 			var oauth_token = location.hash.split('#access_token=')[1];
