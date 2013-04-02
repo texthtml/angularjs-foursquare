@@ -208,6 +208,10 @@
 			setOAuthToken: function FoursquareSetOAuthToken(oauth_token) {
 				Foursquare.defaultParameters({oauth_token: oauth_token});
 			}, 
+			setLocale: function FoursquareSetLocale(locale) {
+				Foursquare.defaultParameters({locale: locale});
+				$rootScope.apply();
+			}, 
 			authURI: function FoursquareAuthURI(display, response_type) {
 				return 'https://foursquare.com/oauth2/authenticate' + 
 					'?client_id=' + FoursquareClientParams.client_id + 
