@@ -119,7 +119,7 @@
 				categories:            FoursquareEndpoint('get',  'venues/categories',                  '*categories'), 
 				explore:               FoursquareEndpoint('get',  'venues/explore'), 
 				managed:               FoursquareEndpoint('get',  'venues/managed',                     '*venues'), 
-				search:                FoursquareEndpoint('get',  'venues/search',                      '*venues'), 
+				search:                FoursquareEndpoint('get',  'venues/search'), 
 				suggestcompletion:     FoursquareEndpoint('get',  'venues/suggestcompletion',           '*minivenues'), 
 				timeseries:            FoursquareEndpoint('get',  'venues/timeseries',                  '*timeseries'), 
 				trending:              FoursquareEndpoint('get',  'venues/trending',                    '*venues'), 
