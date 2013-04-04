@@ -342,5 +342,20 @@
 				});
 			}
 		}
+	}).directive('fsqPhoto', function foursquarePhotoDirective() {
+		return {
+			restrict: 'A', 
+			link: function foursquarePhotoLinking(scope, element, attrs) {
+				scope.$watch(attrs.fsqPhoto, function(photo) {
+					if(photo !== undefined) {
+						var size = attrs.fsqPhotoSize || 'original';
+						var url  = photo.prefix + size + photo.suffix;
+						var attr = attrs.fsqPhotoAttr || element[0].nodeName === 'IMG' ? 'src' : 'href';
+						
+						element.attr(attr, url);
+					}
+				})
+			}
+		}
 	});
 }) ();

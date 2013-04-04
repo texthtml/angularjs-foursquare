@@ -45,9 +45,9 @@ You need to adjust the path if you install AngularJS-Foursquare somewhere else.
 YOUR_REGISTERED_REDIRECT_URI should also be a page where the FoursquareService is configured.
 
 
-### Usage ##
+## Usage ##
 
-#### The Foursquare object ####
+### The Foursquare object ###
 
 Inject the *Foursquare* Service
 
@@ -55,9 +55,19 @@ Inject the *Foursquare* Service
     	$scope.photos = Foursquare.api.users.photos();
     }
 
-#### Foursqure directives ####
+### Foursquare directives ###
+
+#### fsq:login ####
 
     <fsq:login ng:show="!fsq.logged" fsq:display="touch" fsq:color="black"></fsq:login>
+
+#### fsq:photo ####
+
+    <ul>
+      <li ng:repeat="photo in checkin.photos.items">
+        <a fsq:photo="photo" rel="lightbox[checkin]" title="{{ photo.user.firstName }}"><img fsq:photo="photo" fsq:photoSize="cap48"/></a>
+      </li>
+    </ul>
 
 ## Documentation ##
 
