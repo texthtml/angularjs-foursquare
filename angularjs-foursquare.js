@@ -83,23 +83,9 @@
 				}
 				
 				return resource;
-			}
-			return (function(resource) {
-				return function() {
-					args = [].slice.call(arguments);
-					args[0] = angular.extend(
-						params || {}, 
-						FoursquareDefaultParams, 
-						args[0], FoursquareClientParams
-					);
-					for(var paramName in args[0]) {
-						if(args[0][paramName] === undefined) {
-							delete args[0][paramName];
-						}
-					}
-					return resource[method].apply(resource, args);
-				};
-			}) ($resource(FoursquareAPI + endpoint));
+			};
+			
+			return endpoint;
 		}
 		
 		function notImplemented() {
