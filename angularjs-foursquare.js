@@ -18,20 +18,20 @@
 				client_secret: clientSecret
 			};
 		
-		function FoursquareEndpoint(method, endpoint, resultKey, defaultParams, headers) {
+		function FoursquareEndpoint(method, endpoint_url, resultKey, defaultParams, headers) {
 			var 
 				isArray = typeof resultKey === 'string' && resultKey[0] === '*', 
-				endpointParams = (endpoint.match(/:[^\/]*\b/g) || []).map(function(key) {
-				return key.substr(1);
-			});
-				
-				if(isArray) {
-					resultKey = resultKey.substr(1);
-				}
+				endpointParams = (endpoint_url.match(/:[^\/]*\b/g) || []).map(function(key) {
+					return key.substr(1);
+				});
 			
-			return function(inputParams, data) {
+			if(isArray) {
+				resultKey = resultKey.substr(1);
+			}
+			
+			var endpoint = function(inputParams, data) {
 				var 
-					url = endpoint, 
+					url = endpoint_url, 
 					first = true, 
 					params = angular.extend(
 						{}, 
@@ -59,21 +59,25 @@
 						headers: angular.extend({
 							'X-Requested-With': undefined
 						}, headers || {}), 
-						transformResponse: function(data) {
-							if(typeof data === 'string') {
-								data = JSON.parse(data);
+						transformResponse: function(response_data) {
+							if(typeof response_data === 'string') {
+								response_data = JSON.parse(response_data);
 							}
-							if(200 <= data.meta.code && data.meta.code < 300) {
+							if(200 >= response_data.meta.code && response_data.meta.code < 300) {
 								angular.copy(
-									resultKey === undefined ? data.response : data.response[resultKey], 
+									resultKey === undefined ? response_data.response : response_data.response[resultKey], 
 									resource
 								);
 								
 								return resource;
 							}
 							
-							delete data.meta.code;
-							return data.meta;
+							response_data.meta.retry = function() {
+								return endpoint(inputParams, data);
+							}
+							
+							delete response_data.meta.code;
+							return response_data.meta;
 						}
 					});
 				
