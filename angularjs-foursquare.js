@@ -2,7 +2,7 @@
 	"use strict";
 	
 	
-	var FoursquareResourcesPath = 'components/angularjs-foursquare';
+	var FoursquareResourcesPath = '/components/angularjs-foursquare';
 	
 	function FoursquareService($q, $http, $rootScope, clientId, clientSecret, clientRedirectURI, clientSaveOAuthToken, clientGetOAuthToken) {
 		var
