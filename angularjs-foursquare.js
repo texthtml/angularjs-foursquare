@@ -68,7 +68,6 @@
 									resultKey === undefined ? response_data.response : response_data.response[resultKey], 
 									resource
 								);
-								
 								return resource;
 							}
 							
@@ -81,7 +80,6 @@
 						}
 					});
 				
-				resource.then = q.then.bind(q);
 				resource.then = function() {
 					return q.then.apply(q, arguments);
 				}
