@@ -29,7 +29,17 @@
 				resultKey = resultKey.substr(1);
 			}
 			
-			var endpoint = function(inputParams, data) {
+			var endpoint = function(inputParams, data, callback) {
+				if(typeof inputParams === 'function') {
+					callback = inputParams;
+					inputParams = undefined;
+				}
+				
+				if(typeof data === 'function') {
+					callback = data;
+					data = undefined;
+				}
+				
 				var 
 					url = endpoint_url, 
 					first = true, 
@@ -80,9 +90,7 @@
 						}
 					});
 				
-				resource.then = function() {
-					return q.then.apply(q, arguments);
-				}
+				q.then(callback);
 				
 				return resource;
 			};
