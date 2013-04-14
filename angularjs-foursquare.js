@@ -201,7 +201,7 @@
 				add:                   FoursquareEndpoint('post', 'photos/add',                         'photo', {}, {'content-type': 'image/jpeg'})}), 
 			settings: e(               FoursquareEndpoint('get',  'settings/:setting_id',               'value'), {
 				all:                   FoursquareEndpoint('get',  'settings/all',                       'settings'), 
-				set:                   FoursquareEndpoint('post', 'settings/:setting_id/set',           'message')}), 
+				set:                   FoursquareEndpoint('post', 'settings/:setting_id/set',           'settings')}), 
 			specials: e(               FoursquareEndpoint('get',  'specials/:special_id',               'special'), {
 				add:                   FoursquareEndpoint('post', 'specials/add',                       'special'), 
 				list:                  FoursquareEndpoint('get',  'specials/list',                      'specials'), 
