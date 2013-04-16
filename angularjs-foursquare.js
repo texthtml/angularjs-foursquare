@@ -325,7 +325,7 @@
 		};
 	}
 
-	angular.module('FoursquareService', ['ngResource'], function($provide) {
+	angular.module('FoursquareService', [], function($provide) {
 		$provide.provider('Foursquare', FoursquareProvider);
 	}).directive('fsqLogin', function foursquareLoginDirective($parse, Foursquare) {
 		return {
