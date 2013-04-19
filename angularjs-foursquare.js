@@ -48,7 +48,7 @@
 						defaultParams || {}, 
 						FoursquareDefaultParams, 
 						inputParams || {}, 
-						FoursquareClientParams
+						FoursquareDefaultParams.oauth_token === undefined ? FoursquareClientParams : {}
 					);
 				
 				for(var i = 0; i < endpointParams.length; i++) {
