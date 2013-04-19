@@ -205,7 +205,7 @@
 				notifications:         FoursquareEndpoint('get',  'updates/notifications',              'notifications'), 
 				marknotificationsread: FoursquareEndpoint('get',  'updates/marknotificationsread',      'notifications')}), 
 			photos: e(                 FoursquareEndpoint('get',  'photos/:photo_id',                   'photo'), {
-				add:                   FoursquareEndpoint('post', 'photos/add',                         'photo', {}, {'content-type': 'image/jpeg'})}), 
+				add:                   FoursquareEndpoint('post', 'photos/add',                         'photo', {}, {'Content-Type': false})}), 
 			settings: e(               FoursquareEndpoint('get',  'settings/:setting_id',               'value'), {
 				all:                   FoursquareEndpoint('get',  'settings/all',                       'settings'), 
 				set:                   FoursquareEndpoint('post', 'settings/:setting_id/set',           'settings')}), 
