@@ -59,11 +59,18 @@
 					}
 				}
 				
+				if(method.toUpperCase() === 'POST') {
+					data = data || new FormData;
+					for(var name in params) {
+						data.append(name, params[name]);
+					}
+				}
+				
 				var 
 					resource = isArray ? [] : {}, 
 					q = $http({
 						url: FoursquareAPI + url, 
-						params: params, 
+						params: method.toUpperCase() === 'POST' ? undefined : params, 
 						method: method, 
 						data: data, 
 						headers: angular.extend({
