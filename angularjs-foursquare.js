@@ -62,7 +62,14 @@
 				if(method.toUpperCase() === 'POST') {
 					data = data || new FormData;
 					for(var name in params) {
-						data.append(name, params[name]);
+						if(
+							params[name] !== undefined && 
+							params[name] !== null && 
+							params[name] !== false && 
+							params[name] !== NaN
+						) {
+							data.append(name, params[name]);
+						}
 					}
 				}
 				
