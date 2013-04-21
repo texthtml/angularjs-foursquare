@@ -18,7 +18,7 @@
 				client_secret: clientSecret
 			};
 		
-		function FoursquareEndpoint(method, endpoint_url, resultKey, defaultParams, headers) {
+		function FoursquareEndpoint(method, endpoint_url, resultKey, defaultParams) {
 			var 
 				isArray = typeof resultKey === 'string' && resultKey[0] === '*', 
 				endpointParams = (endpoint_url.match(/:[^\/]*\b/g) || []).map(function(key) {
@@ -75,7 +75,7 @@
 						data: data, 
 						headers: angular.extend({
 							'X-Requested-With': undefined
-						}, headers || {}), 
+						}, method.toUpperCase() === 'POST' ? {'Content-Type': false} : {}), 
 						transformResponse: function(response_data) {
 							if(typeof response_data === 'string') {
 								response_data = JSON.parse(response_data);
@@ -205,7 +205,7 @@
 				notifications:         FoursquareEndpoint('get',  'updates/notifications',              'notifications'), 
 				marknotificationsread: FoursquareEndpoint('get',  'updates/marknotificationsread',      'notifications')}), 
 			photos: e(                 FoursquareEndpoint('get',  'photos/:photo_id',                   'photo'), {
-				add:                   FoursquareEndpoint('post', 'photos/add',                         'photo', {}, {'Content-Type': false})}), 
+				add:                   FoursquareEndpoint('post', 'photos/add',                         'photo')}), 
 			settings: e(               FoursquareEndpoint('get',  'settings/:setting_id',               'value'), {
 				all:                   FoursquareEndpoint('get',  'settings/all',                       'settings'), 
 				set:                   FoursquareEndpoint('post', 'settings/:setting_id/set',           'settings')}), 
