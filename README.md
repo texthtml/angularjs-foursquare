@@ -30,16 +30,16 @@ You need to adjust the path if you install AngularJS-Foursquare somewhere else.
 
 #### configuring the FoursquareService ####
 
-    angular.module('MyApp', [FoursquareService'])
-    	.config(function FoursquareAppRun(FoursquareProvider) {
-    		FoursquareProvider.config({
+    angular.module('MyApp', [thFoursquareService'])
+    	.config(function FoursquareAppRun(thFoursquareProvider) {
+    		thFoursquareProvider.config({
     			clientId: 'YOUR_CLIENT_ID', 
     			clientSecret: 'YOUR_CLIENT_SECRET', 
     			redirectURI: 'YOUR_REGISTERED_REDIRECT_URI'
     		});
     		
     		// uncomment and adjust if you install AngularJS-Foursquare somewhere else.
-    		// FoursquareProvider.setPath('components/angularjs-foursquare'); 
+    		// thFoursquareProvider.setPath('components/angularjs-foursquare'); 
     	});
 
 YOUR_REGISTERED_REDIRECT_URI should also be a page where the FoursquareService is configured.
@@ -49,23 +49,23 @@ YOUR_REGISTERED_REDIRECT_URI should also be a page where the FoursquareService i
 
 ### The Foursquare object ###
 
-Inject the *Foursquare* Service
+Inject *thFoursquare* Service
 
-    function FoursquareCtrl($scope, $timeout, Foursquare) {
-    	$scope.photos = Foursquare.api.users.photos();
+    function FoursquareCtrl($scope, $timeout, thFoursquare) {
+    	$scope.photos = thFoursquare.api.users.photos();
     }
 
 ### Foursquare directives ###
 
 #### fsq:login ####
 
-    <fsq:login ng:show="!fsq.logged" fsq:display="touch" fsq:color="black"></fsq:login>
+    <th:fsq-login ng:show="!thFsq.logged" th:fsq-display="touch" th:fsq-color="black"></th:fsq-login>
 
 #### fsq:photo ####
 
     <ul>
       <li ng:repeat="photo in checkin.photos.items">
-        <a fsq:photo="photo" rel="lightbox[checkin]" title="{{ photo.user.firstName }}"><img fsq:photo="photo" fsq:photoSize="cap48"/></a>
+        <a th:fsq-photo="photo" rel="lightbox[checkin]" title="{{ photo.user.firstName }}"><img th:fsq-photo="photo" th:fsq-photo-size="cap48"/></a>
       </li>
     </ul>
 

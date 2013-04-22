@@ -339,38 +339,38 @@
 		};
 	}
 
-	angular.module('FoursquareService', [], function($provide) {
-		$provide.provider('Foursquare', FoursquareProvider);
-	}).directive('fsqLogin', function foursquareLoginDirective($parse, Foursquare) {
+	angular.module('thFoursquareService', [], function($provide) {
+		$provide.provider('thFoursquare', FoursquareProvider);
+	}).directive('thFsqLogin', function foursquareLoginDirective($parse, thFoursquare) {
 		return {
 			restrict: 'E', 
 			template: '<form><input type="image" ng:src="' + FoursquareResourcesPath + '/connect-{{color}}.png" alt="connect to Foursquare"></input></form>', 
 			replace: true, 
 			scope: {
-				onLogin: '&fsqOnLogin', 
-				color: '@fsqColor', 
-				step: '@fsqStep', 
-				display: '@fsqDisplay'
+				onLogin: '&thFsqOnLogin', 
+				color: '@thFsqColor', 
+				step: '@thFsqStep', 
+				display: '@thFsqDisplay'
 			}, 
 			link: function foursquareLoginLinking(scope, element, attrs) {
-				scope.fsq = Foursquare;
+				scope.thFsq = thFoursquare;
 				
 				var onLogin = $parse(scope.onLogin);
 				
 				element.bind('submit', function() {
-					Foursquare.login(onLogin, scope.step, scope.display);
+					thFoursquare.login(onLogin, scope.step, scope.display);
 				});
 			}
 		}
-	}).directive('fsqPhoto', function foursquarePhotoDirective() {
+	}).directive('thFsqPhoto', function foursquarePhotoDirective() {
 		return {
 			restrict: 'A', 
 			link: function foursquarePhotoLinking(scope, element, attrs) {
-				scope.$watch(attrs.fsqPhoto, function(photo) {
+				scope.$watch(attrs.thFsqPhoto, function(photo) {
 					if(photo !== undefined) {
-						var size = attrs.fsqPhotoSize || 'original';
+						var size = attrs.thFsqPhotoSize || 'original';
 						var url  = photo.prefix + size + photo.suffix;
-						var attr = attrs.fsqPhotoAttr || element[0].nodeName === 'IMG' ? 'src' : 'href';
+						var attr = attrs.thFsqPhotoAttr || element[0].nodeName === 'IMG' ? 'src' : 'href';
 						
 						element.attr(attr, url);
 					}
