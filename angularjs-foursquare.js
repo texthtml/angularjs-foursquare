@@ -29,20 +29,23 @@
 				resultKey = resultKey.substr(1);
 			}
 			
-			var endpoint = function(inputParams, data, callback) {
+			var endpoint = function(inputParams, data, success, failure) {
 				if(typeof inputParams === 'function') {
-					callback = inputParams;
+					failure     = data;
+					success     = inputParams;
+					data        = undefined;
 					inputParams = undefined;
 				}
 				
 				if(typeof data === 'function') {
-					callback = data;
-					data = undefined;
+					failure = success;
+					success = data;
+					data    = undefined;
 				}
 				
 				var 
-					url = endpoint_url, 
-					first = true, 
+					url    = endpoint_url, 
+					first  = true, 
 					params = angular.extend(
 						{}, 
 						defaultParams || {}, 
@@ -104,7 +107,7 @@
 						}
 					});
 				
-				q.then(callback);
+				q.then(success, failure);
 				
 				return resource;
 			};
