@@ -272,17 +272,31 @@
 					'&response_type=' + (response_type || 'token') + 
 					'&redirect_uri=' + encodeURI(FoursquareClientRedirectURI);
 			}, 
-			login: function FoursquareLogin(callback, step, display, response_type) {
-				var interval = window.setInterval(function() {
-					if(this.closed) {
-						window.clearInterval(interval);
-						Foursquare.setOAuthToken(FoursquareClientGetOAuthToken());
-						
-						callback && callback(Foursquare.logged);
-						
-						$rootScope.$apply();
-					}
-				}.bind(window.open(Foursquare.authURI(display, response_type))), step || 500);
+			login: function FoursquareLogin(step, display, response_type) {
+				var deferred = $q.defer();
+				
+				if(Foursquare.logged === false) {
+					var interval = window.setInterval(function() {
+						if(this.closed) {
+							window.clearInterval(interval);
+							Foursquare.setOAuthToken(FoursquareClientGetOAuthToken());
+							
+							if(Foursquare.logged) {
+								deferred.resolve();
+							}
+							else {
+								deferred.reject();
+							}
+							
+							$rootScope.$apply();
+						}
+					}.bind(window.open(Foursquare.authURI(display, response_type))), step || 500);
+				}
+				else {
+					deferred.resolve();
+				}
+				
+				return deferred.promise;
 			}, 
 			logout: function FoursquareLogout() {
 				Foursquare.setOAuthToken(undefined);
@@ -358,10 +372,10 @@
 			link: function foursquareLoginLinking(scope, element, attrs) {
 				scope.thFsq = thFoursquare;
 				
-				var onLogin = $parse(scope.onLogin);
-				
 				element.bind('submit', function() {
-					thFoursquare.login(onLogin, scope.step, scope.display);
+					thFoursquare.login(scope.step, scope.display).then(function() {
+						$parse(scope.onLogin);
+					});
 				});
 			}
 		}
