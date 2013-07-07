@@ -361,7 +361,7 @@
 	}).directive('thFsqLogin', function foursquareLoginDirective($parse, thFoursquare) {
 		return {
 			restrict: 'E', 
-			template: '<form><input type="image" ng:src="' + FoursquareResourcesPath + '/connect-{{color}}.png" alt="connect to Foursquare"></input></form>', 
+			template: '<form><input type="image" ng:src="' + FoursquareResourcesPath + '/images/connect-{{color}}.png" alt="connect to Foursquare"></input></form>', 
 			replace: true, 
 			scope: {
 				onLogin: '&thFsqOnLogin', 
