@@ -345,7 +345,7 @@
 			FoursquareResourcesPath = path;
 		}
 		
-		this.$get = function FoursquareProviderFactory($q, $http, $rootScope) {
+		this.$get = ['$q', '$http', '$rootScope', function FoursquareProviderFactory($q, $http, $rootScope) {
 			return new FoursquareService(
 				$q, $http, 
 				$rootScope, 
@@ -353,12 +353,12 @@
 				FoursquareConfig.redirectURI, 
 				FoursquareConfig.saveOAuthToken, FoursquareConfig.getOAuthToken
 			);
-		};
+		}];
 	}
 
-	angular.module('thFoursquareService', [], function($provide) {
+	angular.module('thFoursquareService', [], ['$provide', function($provide) {
 		$provide.provider('thFoursquare', FoursquareProvider);
-	}).directive('thFsqLogin', function foursquareLoginDirective($parse, thFoursquare) {
+	}]).directive('thFsqLogin', ['$parse', 'thFoursquare', function foursquareLoginDirective($parse, thFoursquare) {
 		return {
 			restrict: 'E', 
 			template: '<form><input type="image" ng:src="' + FoursquareResourcesPath + '/images/connect-{{color}}.png" alt="connect to Foursquare"></input></form>', 
@@ -379,7 +379,7 @@
 				});
 			}
 		}
-	}).directive('thFsqPhoto', function foursquarePhotoDirective() {
+	}]).directive('thFsqPhoto', function foursquarePhotoDirective() {
 		return {
 			restrict: 'A', 
 			link: function foursquarePhotoLinking(scope, element, attrs) {
