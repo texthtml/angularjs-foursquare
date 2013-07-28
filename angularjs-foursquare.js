@@ -1,5 +1,5 @@
 (function() {
-	"use strict";
+	'use strict';
 	
 	
 	var FoursquareResourcesPath = '/components/angularjs-foursquare';
@@ -51,7 +51,7 @@
 						defaultParams || {}, 
 						FoursquareDefaultParams, 
 						inputParams || {}, 
-						FoursquareDefaultParams.oauth_token === undefined ? FoursquareClientParams : {}
+						FoursquareDefaultParams.oauth_token === null ? FoursquareClientParams : {}
 					);
 				
 				for(var i = 0; i < endpointParams.length; i++) {
@@ -63,13 +63,13 @@
 				}
 				
 				if(method.toUpperCase() === 'POST') {
-					data = data || new FormData;
+					data = data || new FormData();
 					for(var name in params) {
 						if(
 							params[name] !== undefined && 
 							params[name] !== null && 
 							params[name] !== false && 
-							params[name] !== NaN
+							!isNaN(params[name])
 						) {
 							data.append(name, params[name]);
 						}
@@ -100,7 +100,7 @@
 							
 							response_data.meta.retry = function() {
 								return endpoint(inputParams, data);
-							}
+							};
 							
 							delete response_data.meta.code;
 							return response_data.meta;
@@ -254,7 +254,7 @@
 		var Foursquare = {
 			defaultParameters: function FoursquareDefaultParameters(params) {
 				FoursquareDefaultParams = angular.extend(FoursquareDefaultParams, params);
-				Foursquare.logged = FoursquareDefaultParams.oauth_token !== undefined;
+				Foursquare.logged = FoursquareDefaultParams.oauth_token !== null;
 				
 				return FoursquareDefaultParams;
 			}, 
@@ -299,8 +299,8 @@
 				return deferred.promise;
 			}, 
 			logout: function FoursquareLogout() {
-				Foursquare.setOAuthToken(undefined);
-				FoursquareClientSaveOAuthToken(undefined);
+				Foursquare.setOAuthToken(null);
+				FoursquareClientSaveOAuthToken(null);
 			}, 
 			api: api
 		};
@@ -317,15 +317,15 @@
 			clientSecret: undefined, 
 			redirectURI: undefined, 
 			saveOAuthToken: function SaveOAuthToken(OAuthToken) {
-				if(OAuthToken === undefined) {
+				if(OAuthToken === null) {
 					localStorage.removeItem('foursquare_oauth_token');
 				}
 				else {
-					localStorage.foursquare_oauth_token = OAuthToken;
+					localStorage.setItem('foursquare_oauth_token', OAuthToken);
 				}
 			}, 
 			getOAuthToken: function GetOAuthToken() {
-				return localStorage.foursquare_oauth_token;
+				return localStorage.getItem('foursquare_oauth_token');
 			}
 		};
 		
