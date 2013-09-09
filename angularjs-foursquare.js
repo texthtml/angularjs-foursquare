@@ -1,7 +1,8 @@
-(function() {
+define(function(require) {
 	'use strict';
 	
 	
+	var angular = angular || require('components/angular/angular');
 	var FoursquareResourcesPath = '/components/angularjs-foursquare';
 	
 	function FoursquareService($q, $http, $rootScope, clientId, clientSecret, clientRedirectURI, clientSaveOAuthToken, clientGetOAuthToken) {
@@ -395,4 +396,4 @@
 			}
 		}
 	});
-}) ();
+});
