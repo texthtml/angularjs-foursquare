@@ -79,9 +79,10 @@ define(function(require) {
 				
 				var 
 					resource = isArray ? [] : {}, 
-					q = $http({
+					post = method.toUpperCase() === 'POST', 
+					http_request = {
 						url: FoursquareAPI + url, 
-						params: method.toUpperCase() === 'POST' ? undefined : params, 
+						params: post ? undefined : params, 
 						method: method, 
 						data: data, 
 						headers: angular.extend({
@@ -106,7 +107,8 @@ define(function(require) {
 							delete response_data.meta.code;
 							return response_data.meta;
 						}
-					});
+					}, 
+					q = $http(http_request);
 				
 				q.then(success, failure);
 				
