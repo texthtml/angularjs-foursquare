@@ -70,7 +70,7 @@ define(function(require) {
 							params[name] !== undefined && 
 							params[name] !== null && 
 							params[name] !== false && 
-							!isNaN(params[name])
+							!Number.isNaN(params[name])
 						) {
 							data.append(name, params[name]);
 						}
