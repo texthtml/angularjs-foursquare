@@ -2,8 +2,8 @@ define(function(require) {
 	'use strict';
 	
 	
-	var angular = angular || require('components/angular/angular');
-	var FoursquareResourcesPath = '/components/angularjs-foursquare';
+	var angular = angular || require('bower_components/angular/angular');
+	var FoursquareResourcesPath = '/bower_components/angularjs-foursquare';
 	
 	function FoursquareService($q, $http, $rootScope, clientId, clientSecret, clientRedirectURI, clientSaveOAuthToken, clientGetOAuthToken, locale) {
 		var
