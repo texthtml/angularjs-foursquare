@@ -1,0 +1,15 @@
+{
+  "name": "angularjs-foursquare",
+  "main": "angularjs-foursquare.js",
+  "version": "1.0.0",
+  "authors": [
+    "Mathieu Rochette <mathieu@rochette.cc>"
+  ],
+  "description": "AngularJS module for Foursquare API",
+  "keywords": [
+    "foursquare",
+    "api"
+  ],
+  "license": "aGPLv3",
+  "homepage": "https://texthtml.net/trac/projects/webapp-lib-angularjs-foursquare"
+}
