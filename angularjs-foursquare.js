@@ -5,14 +5,15 @@ define(function(require) {
 	var angular = angular || require('components/angular/angular');
 	var FoursquareResourcesPath = '/components/angularjs-foursquare';
 	
-	function FoursquareService($q, $http, $rootScope, clientId, clientSecret, clientRedirectURI, clientSaveOAuthToken, clientGetOAuthToken) {
+	function FoursquareService($q, $http, $rootScope, clientId, clientSecret, clientRedirectURI, clientSaveOAuthToken, clientGetOAuthToken, locale) {
 		var
 			FoursquareAPI = 'https://api.foursquare.com/v2/', 
 			FoursquareClientRedirectURI = clientRedirectURI, 
 			FoursquareClientSaveOAuthToken = clientSaveOAuthToken, 
 			FoursquareClientGetOAuthToken = clientGetOAuthToken, 
 			FoursquareDefaultParams = {
-				v: 20130317
+				v: 20130317, 
+				locale: locale
 			}, 
 			FoursquareClientParams = {
 				client_id: clientId, 
@@ -329,7 +330,8 @@ define(function(require) {
 			}, 
 			getOAuthToken: function GetOAuthToken() {
 				return localStorage.getItem('foursquare_oauth_token');
-			}
+			}, 
+			locale: 'en'
 		};
 		
 		this.config = function FoursquareProviderConfig(config) {
@@ -354,7 +356,8 @@ define(function(require) {
 				$rootScope, 
 				FoursquareConfig.clientId, FoursquareConfig.clientSecret, 
 				FoursquareConfig.redirectURI, 
-				FoursquareConfig.saveOAuthToken, FoursquareConfig.getOAuthToken
+				FoursquareConfig.saveOAuthToken, FoursquareConfig.getOAuthToken, 
+				FoursquareConfig.locale
 			);
 		}];
 	}
