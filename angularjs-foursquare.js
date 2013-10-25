@@ -269,15 +269,26 @@ define(function(require) {
 				Foursquare.defaultParameters({locale: locale});
 				$rootScope.apply();
 			}, 
-			authURI: function FoursquareAuthURI(display, response_type) {
+			authenticateURI: function FoursquareAuthenticateURI(display, response_type) {
 				return 'https://foursquare.com/oauth2/authenticate' + 
 					'?client_id=' + FoursquareClientParams.client_id + 
 					'&display=' + (display || '') + 
 					'&response_type=' + (response_type || 'token') + 
 					'&redirect_uri=' + encodeURI(FoursquareClientRedirectURI);
 			}, 
-			login: function FoursquareLogin(step, display, response_type) {
+			authorizeURI: function FoursquareAuthorizeURI(display, response_type) {
+				return 'https://foursquare.com/oauth2/authorize' + 
+					'?client_id=' + FoursquareClientParams.client_id + 
+					'&display=' + (display || '') + 
+					'&response_type=' + (response_type || 'token') + 
+					'&redirect_uri=' + encodeURI(FoursquareClientRedirectURI);
+			}, 
+			login: function FoursquareLogin(step, auth_type, display, response_type) {
 				var deferred = $q.defer();
+				
+				if(auth_type !== 'authorize' && auth_type !== 'authenticate') {
+					auth_type = 'authorize';
+				}
 				
 				if(Foursquare.logged === false) {
 					var interval = window.setInterval(function() {
@@ -294,7 +305,7 @@ define(function(require) {
 							
 							$rootScope.$apply();
 						}
-					}.bind(window.open(Foursquare.authURI(display, response_type))), step || 500);
+					}.bind(window.open(Foursquare[auth_type+'URI'](display, response_type))), step || 500);
 				}
 				else {
 					deferred.resolve();
