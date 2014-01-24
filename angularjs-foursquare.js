@@ -267,7 +267,7 @@ define(function(require) {
 			}, 
 			setLocale: function FoursquareSetLocale(locale) {
 				Foursquare.defaultParameters({locale: locale});
-				$rootScope.apply();
+				$rootScope.$apply();
 			}, 
 			authenticateURI: function FoursquareAuthenticateURI(display, response_type) {
 				return 'https://foursquare.com/oauth2/authenticate' + 
